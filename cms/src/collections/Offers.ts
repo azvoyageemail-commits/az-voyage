@@ -147,7 +147,10 @@ export const Offers: CollectionConfig = {
     defaultColumns: ["title", "destination", "country", "price", "status"],
   },
   access: {
-    read: () => true, // Public read
+    read: () => true,
+    create: () => true,
+    update: () => true,
+    delete: () => true,
   },
   fields: [
     /* ── Core identity ── */
