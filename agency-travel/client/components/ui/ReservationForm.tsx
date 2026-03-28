@@ -143,22 +143,23 @@ const ReservationForm = ({
 
     setSubmitting(true);
     try {
-      const res = await fetch(`${API_URL}/api/reservation`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          fullName,
-          phone,
-          offerTitle: offerTitle || "",
-          offerId: offerId || "",
-          selectedHotel: selectedHotelData?.name || selectedHotel,
-          adults,
-          children,
-          childDetails: childDetailsArr.length > 0 ? JSON.stringify(childDetailsArr) : undefined,
-          totalEstimated: formatPrice(total),
-          currency,
-        }),
-      });
+      const CMS_URL = import.meta.env.VITE_CMS_URL?.replace(/\/$/, "") || "https://agency-baack-production.up.railway.app";
+
+const res = await fetch(`${CMS_URL}/api/reservations`, {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    fullName,
+    phone,
+    offerTitle: offerTitle || "",
+    offerId: offerId || "",
+    selectedHotel: selectedHotelData?.name || selectedHotel,
+    adults,
+    children,
+    totalEstimated: formatPrice(total),
+    currency,
+  }),
+});
 
       if (!res.ok) throw new Error("Failed to submit");
 
