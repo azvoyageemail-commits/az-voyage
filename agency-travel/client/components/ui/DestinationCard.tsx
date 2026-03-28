@@ -75,7 +75,7 @@ const DestinationCard = ({
 
     if (href) {
         return (
-            <a href={href} className="block">
+            <a href={/listing} className="block">
                 {content}
             </a>
         );
