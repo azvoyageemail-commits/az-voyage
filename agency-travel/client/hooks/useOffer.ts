@@ -259,7 +259,9 @@ export function getOfferGalleryUrls(
 export function getHotelImageUrls(
   hotel: OfferDetailData["hotels"] extends (infer H)[] ? H : never,
 ): string[] {
-  return resolveGalleryUrls(hotel.images);
+  const main = resolveImageUrl((hotel as any).mainImage, (hotel as any).mainImageUrl);
+  const gallery = resolveGalleryUrls((hotel as any).images);
+  return [main, ...gallery].filter(Boolean);
 }
 
 /**
