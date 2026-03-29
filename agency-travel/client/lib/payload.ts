@@ -111,8 +111,10 @@ export function resolveImageUrl(
   fallbackUrl?: string,
 ): string {
   if (typeof uploadField === "string") {
-    return fallbackUrl || "";
-  }
+  // Payload can return relations as an ID string when depth is not enough.
+  // In that case, point directly to the media REST endpoint so <img> has a valid src.
+  return `${CMS_API_BASE}/media/${uploadField}`;
+}
 
   if (uploadField?.url) {
     // If the URL is relative, prepend the CMS URL
